@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <properties>
+        <title>Plugin myportal-mycrmnotifications</title>
+    </properties>
+    <body>
+        <section name="Plugin myportal-mycrmnotifications">
+            <!--
+            <p>
+                <img src="images/myportal-mycrmnotifications.png" />
+            </p>
+            -->
+            <subsection name="Introduction">
+                <p></p>
+            </subsection>
+            <subsection name="Configuration">
+                <p></p>
+            </subsection>
+            <subsection name="Usage">
+                <p></p>
+            </subsection>
+        </section>
+    </body>
+</document>
+
