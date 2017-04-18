@@ -47,4 +47,10 @@
         <jiraProjectName>CRMNOTIFS</jiraProjectName>
         <jiraComponentId></jiraComponentId>
     </properties>
+      <scm>
+        <connection>scm:git:https://github.com/lutece-platform/lutece-cms-module-myportal-mycrmnotifications.git</connection>
+        <developerConnection>scm:git:https://github.com/lutece-platform/lutece-cms-module-myportal-mycrmnotifications.git</developerConnection>
+        <url>https://github.com/lutece-platform/lutece-cms-module-myportal-mycrmnotifications.git</url>
+    </scm>
+
 </project>
