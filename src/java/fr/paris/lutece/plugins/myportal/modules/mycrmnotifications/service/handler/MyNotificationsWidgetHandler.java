@@ -53,8 +53,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-
-
 /**
  *
  * MyTasks Widget Handler
@@ -72,44 +70,44 @@ public class MyNotificationsWidgetHandler implements WidgetHandler
     private static final String MARK_MYNOTIFICATION_LIST = "mynotification_list";
     private static final String MARK_ID_WIDGET = "id_widget";
 
-   
-
     /**
      * {@inheritDoc }
      */
     public String renderWidget( Widget widget, LuteceUser user, HttpServletRequest request )
     {
-        DemandFilter filter= new DemandFilter();
-        Map<DemandType,Integer> listNotificationNoteRead=new HashMap<DemandType,Integer>() ;
+        DemandFilter filter = new DemandFilter( );
+        Map<DemandType, Integer> listNotificationNoteRead = new HashMap<DemandType, Integer>( );
 
-        if( user != null ){
-        	
-	       CRMUserService crmUserService = CRMUserService.getService(  );
-	       CRMUser crmUser = crmUserService.findByUserGuid( user.getName() );
-	        
-	        if( crmUser != null ){
-	   
-		        filter.setIdCRMUser(/*crmUser.getIdCRMUser()*/1);
-		        List<Demand> listDemand= DemandService.getService().findByFilter(filter);
-		        listNotificationNoteRead = getNumberNotifications(listDemand);   
-	        }
+        if ( user != null )
+        {
+
+            CRMUserService crmUserService = CRMUserService.getService( );
+            CRMUser crmUser = crmUserService.findByUserGuid( user.getName( ) );
+
+            if ( crmUser != null )
+            {
+
+                filter.setIdCRMUser( /* crmUser.getIdCRMUser() */1 );
+                List<Demand> listDemand = DemandService.getService( ).findByFilter( filter );
+                listNotificationNoteRead = getNumberNotifications( listDemand );
+            }
         }
 
-        Locale locale = request.getLocale(  );
+        Locale locale = request.getLocale( );
 
-        Map<String, Object> model = new HashMap<String, Object>(  );
+        Map<String, Object> model = new HashMap<String, Object>( );
         model.put( MARK_MYNOTIFICATION_LIST, listNotificationNoteRead );
-        model.put( MARK_ID_WIDGET, widget.getIdWidget(  ) );
+        model.put( MARK_ID_WIDGET, widget.getIdWidget( ) );
 
         HtmlTemplate template = AppTemplateService.getTemplate( TEMPLATE_WIDGET_MYNOTIFICATIONS, locale, model );
 
-        return template.getHtml(  );
+        return template.getHtml( );
     }
 
     /**
      * {@inheritDoc }
      */
-    public String getName(  )
+    public String getName( )
     {
         return NAME;
     }
@@ -117,7 +115,7 @@ public class MyNotificationsWidgetHandler implements WidgetHandler
     /**
      * {@inheritDoc }
      */
-    public String getDescription(  )
+    public String getDescription( )
     {
         return DESCRIPTION;
     }
@@ -125,39 +123,46 @@ public class MyNotificationsWidgetHandler implements WidgetHandler
     /**
      * {@inheritDoc}
      */
-    public boolean isCustomizable(  )
+    public boolean isCustomizable( )
     {
         return true;
     }
-    
+
     /**
-     * Get the the notifications not read 
-     * @param listDemand the list demand object
+     * Get the the notifications not read
+     * 
+     * @param listDemand
+     *            the list demand object
      * @return the map of the notification
      */
-    private Map<DemandType,Integer> getNumberNotifications( List<Demand> listDemand )
+    private Map<DemandType, Integer> getNumberNotifications( List<Demand> listDemand )
     {
-        
-		Map<DemandType,Integer> map=new HashMap<DemandType,Integer>() ;
-       
-        for(DemandType demandType:DemandTypeService.getService().findAll()){
-        	for(Demand demand:listDemand){
-        		
-        		if(demand.getIdDemandType() == demandType.getIdDemandType()){
-        			
-        			if(map.containsKey(demandType)){
-        				
-        				map.put(demandType, map.get(demandType.getIdDemandType( ))+demand.getNumberUnreadNotifications());
-        			
-        			}else{
-        				
-        				map.put(demandType, demand.getNumberUnreadNotifications());
-        			}
-        		}
-        	}
-        	
+
+        Map<DemandType, Integer> map = new HashMap<DemandType, Integer>( );
+
+        for ( DemandType demandType : DemandTypeService.getService( ).findAll( ) )
+        {
+            for ( Demand demand : listDemand )
+            {
+
+                if ( demand.getIdDemandType( ) == demandType.getIdDemandType( ) )
+                {
+
+                    if ( map.containsKey( demandType ) )
+                    {
+
+                        map.put( demandType, map.get( demandType.getIdDemandType( ) ) + demand.getNumberUnreadNotifications( ) );
+
+                    }
+                    else
+                    {
+
+                        map.put( demandType, demand.getNumberUnreadNotifications( ) );
+                    }
+                }
+            }
+
         }
-        
 
         return map;
     }
