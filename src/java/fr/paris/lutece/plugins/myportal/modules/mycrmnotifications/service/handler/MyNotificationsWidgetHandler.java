@@ -87,7 +87,7 @@ public class MyNotificationsWidgetHandler implements WidgetHandler
             if ( crmUser != null )
             {
 
-                filter.setIdCRMUser( /* crmUser.getIdCRMUser() */1 );
+                filter.setIdCRMUser( crmUser.getIdCRMUser()  );
                 List<Demand> listDemand = DemandService.getService( ).findByFilter( filter );
                 listNotificationNoteRead = getNumberNotifications( listDemand );
             }
