@@ -151,7 +151,7 @@ public class MyNotificationsWidgetHandler implements WidgetHandler
                     if ( map.containsKey( demandType ) )
                     {
 
-                        map.put( demandType, map.get( demandType.getIdDemandType( ) ) + demand.getNumberUnreadNotifications( ) );
+                        map.put( demandType, map.get( demandType) + demand.getNumberUnreadNotifications( ) );
 
                     }
                     else
